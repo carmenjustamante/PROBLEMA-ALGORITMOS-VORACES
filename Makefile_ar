@@ -1,0 +1,33 @@
+# ==========================================
+# MAKEFILE - AVANCE RAPIDO (AR)
+# ==========================================
+
+# Compilador y banderas de optimización
+CXX = g++
+CXXFLAGS = -O3 -Wall -Wextra -std=c++11
+
+# Nombres de los ejecutables finales
+EXEC_TIEMPOS = tiempos_ar.exe
+EXEC_TEST = test_unitarios_ar.exe
+EXEC_ORACULO = test_oraculo_ar.exe
+
+# Regla principal: compilar todo
+all: $(EXEC_TIEMPOS) $(EXEC_TEST) $(EXEC_ORACULO)
+	@echo ==========================================
+	@echo COMPILACION DE AR COMPLETADA CON EXITO
+	@echo ==========================================
+
+# Reglas de compilacion individuales
+$(EXEC_TIEMPOS): tiempos_ar.cpp algoritmos_ar.cpp algoritmos_ar.h
+	$(CXX) $(CXXFLAGS) tiempos_ar.cpp algoritmos_ar.cpp -o $(EXEC_TIEMPOS)
+
+$(EXEC_TEST): test_unitarios_ar.cpp algoritmos_ar.cpp algoritmos_ar.h
+	$(CXX) $(CXXFLAGS) test_unitarios_ar.cpp algoritmos_ar.cpp -o $(EXEC_TEST)
+
+$(EXEC_ORACULO): test_oraculo_ar.cpp algoritmos_ar.cpp algoritmos_ar.h
+	$(CXX) $(CXXFLAGS) test_oraculo_ar.cpp algoritmos_ar.cpp -o $(EXEC_ORACULO)
+
+# Regla para limpiar los ejecutables y archivos CSV generados
+clean:
+	del /Q *.exe *.csv
+	@echo Limpieza completada.
